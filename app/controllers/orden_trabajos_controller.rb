@@ -1,6 +1,8 @@
 class OrdenTrabajosController < ApplicationController
 
   before_action :set_orden_trabajo, only: [:show, :edit, :update, :destroy]
+  before_action :listado_trabajo, only:[:digital, :offset, :post1, :post2, :post3, :post4, :post5, :post6, :post7]
+
 
   # GET /orden_trabajos
   # GET /orden_trabajos.json
@@ -101,44 +103,33 @@ class OrdenTrabajosController < ApplicationController
 # ESTE SECTOR DEL CONTROLADOR ES PARA LAS DIFERENTES VIEWS DE IMPRESIÓN Y POST
 # ------------------------------------------------------------------------
 def digital
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def offset
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def post1
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def post2
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def post3
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def post4
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def post5
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def post6
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
-
 def post7
-   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
 # ------------------------------------------------------------------------
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def listado_trabajo
+      @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
+    end
+
+
     def set_orden_trabajo
       @orden_trabajo = OrdenTrabajo.find(params[:id])
     end
