@@ -17,7 +17,7 @@ class OrdenTrabajosController < ApplicationController
   end
 
   def listado
-    @orden_trabajos = OrdenTrabajo.all.order('cliente ASC')
+    @orden_trabajos = OrdenTrabajo.all.order('clinom ASC')
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb

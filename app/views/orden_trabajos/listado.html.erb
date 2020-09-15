@@ -43,11 +43,11 @@
   <tbody id="TablaOrdenesTrabajos">
     <% @orden_trabajos.each do |orden_trabajo| %>
       <tr>
-        <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
-        <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
-        <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
-        <td><%= orden_trabajo.post %></td>
-        <td><%= orden_trabajo.fecha_entrega%></td>
+        <td><%= link_to orden_trabajo.trnum, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.clinom, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.nomprod, orden_trabajo %></td>
+        <td><%= orden_trabajo.procesos %></td>
+        <td><%= orden_trabajo.fecentr%></td>
         <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
         <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo)%></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
