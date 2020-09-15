@@ -80,7 +80,6 @@
             <!-- Multiselect dropdown html -->
             <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
               <% OrdenTrabajo::POST.each do  |clave, valor| %>
-                
                   <%if valor == cadenatohash(orden_trabajo.procesos)[clave] %>
                     <option value = <%= cadenatohash(orden_trabajo.Procesos)[clave] %> selected><%= cadenatohash(orden_trabajo.Procesos)[clave] %></option>
                   <%else%>
@@ -96,11 +95,11 @@
           <td><%= f.input :procesos, :as => :hidden, :input_html => { :id => orden_trabajo.id } %></td>
           <td><%= f.input :fecentr, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
           <td><%= f.input :observaciones,  label: false %>  </td>
-          <td><%= f.button :submit, name="OK", :class => "btn btn-primary btn-lg"%></td>
+          <td><%= f.button :submit, name="Guardar", :class => "btn btn-primary btn-lg"%></td>
           <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %> <!-- Fin del simple form-->  
+        <% end %> <!-- Fin del simple form-->
       </tr>
-       
+
     <% end %>
   </tbody>
   <!--Fin Tabla-->

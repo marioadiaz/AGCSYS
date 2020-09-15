@@ -1,37 +1,41 @@
 <div class="container">
+<h3 class="font-weight-bold text-center"> <%= orden_trabajo.clinom %> </h3>
 <%= simple_form_for (@orden_trabajo)  do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="select1">
-    <%= f.input :ot %>
-    <%= f.input :cliente %>
-    <%= f.text_field :fecha_entrega, :class => 'datepicker' , :default=>Date.today + 8.day %>
+    <%= f.input :nomprod, label: "Producto"%>
     <%= f.input :observaciones %>
-    <%= f.input :producto%>
-    <div>
-      <!-- Multiselect dropdown orden_trabajo.post -->
+
+  <div class="d-flex justify-content-between w-75 mt-5">
+    <div class="mr-5 "><%= f.input :trcan,label: "Cantidad"%></div>
+    <div class="mr-5"><%= f.input :fecentr, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: "Fecha Entrega" %></div>
+
+    <div class="">
+      <p class="font-weight-bold text-center">Proceso</p>
+      <!-- Multiselect dropdown orden_trabajo.procesos -->
       <script type="text/javascript">
         $(document).ready(function() {
-          $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
+          $("#orden_trabajo_procesos_<%=orden_trabajo.id%>").multiselect({
             allSelectedText: 'Showing All'
           });
         });
-      //Fin del efecto multiselect orden_trabajo.post
-      
+      //Fin del efecto multiselect orden_trabajo.procesos
+
       //Cambia los valores de la cadena de proceso
       $(function () {
-        
-        $("#orden_trabajo_post_<%=orden_trabajo.id%>").change(function () {
+
+        $("#orden_trabajo_procesos_<%=orden_trabajo.id%>").change(function () {
           var ValorSeleccionadoDropdown = $(this).val();
           document.getElementById("MuestraProcesoPost_<%=orden_trabajo.id%>").innerHTML = ValorSeleccionadoDropdown;
           $(document).ready(function(){$("#<%=orden_trabajo.id%>").val(ValorSeleccionadoDropdown)});
         });
       });
-      
+
       //Fin de cambio los valores de la cadena de proceso
       function almacenar_valores(ValorSeleccionadoDropdown){
-        var orden_trabajo_postanterior =  document.getElementById("MuestraProcesoPost_<%=orden_trabajo.id%>");
-        console.log(orden_trabajo_postanterior);
+        var orden_trabajo_procesosanterior =  document.getElementById("MuestraProcesoPost_<%=orden_trabajo.id%>");
+        console.log(orden_trabajo_procesosanterior);
       }
 
       // Inicio de Date Picekr
@@ -41,23 +45,30 @@
       });
      // Fin del Date Picker
     </script>
-    <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
+
+    <select id= "orden_trabajo_procesos_<%=orden_trabajo.id%>" multiple="multiple" >
       <% OrdenTrabajo::POST.each do  |clave, valor| %>
-                
-                  <%if valor == cadenatohash(orden_trabajo.post)[clave] %>
-                    <option id=<%clave%> value = <%= cadenatohash(orden_trabajo.post)[clave] %> selected><%= cadenatohash(orden_trabajo.post)[clave] %></option>
+
+                  <%if valor == cadenatohash(orden_trabajo.procesos)[clave] %>
+                    <option id=<%clave%> value = <%= cadenatohash(orden_trabajo.procesos)[clave] %> selected><%= cadenatohash(orden_trabajo.procesos)[clave] %></option>
                   <%else%>
                     <option id=<%clave%> value = <%= valor %> ><%= valor %></option>
                   <%end%>
               <%end%>
             </select>
-        
-          <%= f.input :post, :input_html => { :id => orden_trabajo.id} %>
+
+          <%= f.input :procesos, :as => :hidden, :input_html => { :id => orden_trabajo.id} %>
           <p id="MuestraProcesoPost_<%=orden_trabajo.id%>"></p>
-        
+
     </div>
   </div>
+  </div>
+<div class="d-flex justify-content-between mt-5">
+  <div class="w-25 mr-3"> <%= f.input :trnum, label: "Ot"  %> </div>
+  <div class="w-75 ml-3"> <%= f.input :clinom, label: "Nombre" %> </div>
+</div>
 <div>
-  <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%>
+  <%= f.button :submit, name="Confirmar", :class => "center-block btn btn-primary btn-lg btn-block w-50  mt-5"%>
 </div>
 <% end %>
+
