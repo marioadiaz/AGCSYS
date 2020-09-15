@@ -1,0 +1,63 @@
+<div class="container">
+<%= simple_form_for (@orden_trabajo)  do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="select1">
+    <%= f.input :ot %>
+    <%= f.input :cliente %>
+    <%= f.text_field :fecha_entrega, :class => 'datepicker' , :default=>Date.today + 8.day %>
+    <%= f.input :observaciones %>
+    <%= f.input :producto%>
+    <div>
+      <!-- Multiselect dropdown orden_trabajo.post -->
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
+            allSelectedText: 'Showing All'
+          });
+        });
+      //Fin del efecto multiselect orden_trabajo.post
+      
+      //Cambia los valores de la cadena de proceso
+      $(function () {
+        
+        $("#orden_trabajo_post_<%=orden_trabajo.id%>").change(function () {
+          var ValorSeleccionadoDropdown = $(this).val();
+          document.getElementById("MuestraProcesoPost_<%=orden_trabajo.id%>").innerHTML = ValorSeleccionadoDropdown;
+          $(document).ready(function(){$("#<%=orden_trabajo.id%>").val(ValorSeleccionadoDropdown)});
+        });
+      });
+      
+      //Fin de cambio los valores de la cadena de proceso
+      function almacenar_valores(ValorSeleccionadoDropdown){
+        var orden_trabajo_postanterior =  document.getElementById("MuestraProcesoPost_<%=orden_trabajo.id%>");
+        console.log(orden_trabajo_postanterior);
+      }
+
+      // Inicio de Date Picekr
+      $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+      });
+     // Fin del Date Picker
+    </script>
+    <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
+      <% OrdenTrabajo::POST.each do  |clave, valor| %>
+                
+                  <%if valor == cadenatohash(orden_trabajo.post)[clave] %>
+                    <option id=<%clave%> value = <%= cadenatohash(orden_trabajo.post)[clave] %> selected><%= cadenatohash(orden_trabajo.post)[clave] %></option>
+                  <%else%>
+                    <option id=<%clave%> value = <%= valor %> ><%= valor %></option>
+                  <%end%>
+              <%end%>
+            </select>
+        
+          <%= f.input :post, :input_html => { :id => orden_trabajo.id} %>
+          <p id="MuestraProcesoPost_<%=orden_trabajo.id%>"></p>
+        
+    </div>
+  </div>
+<div>
+  <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%>
+</div>
+<% end %>

@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-around">
+  <div class="container">
+      <table class="table table-striped">
+        <h1 class="mt-3">Guillotina</h1>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Producto</th>
+          <th>Observación</th>
+          <th>Fecha Entrega</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% @orden_trabajos.each do |orden_trabajo| %>
+    <% if orden_trabajo.post.include? "Guillotina" %>
+          <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
+            <td><%= orden_trabajo.cliente %></td>
+            <td><%= orden_trabajo.producto %></td>
+            <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
+            <td><%= orden_trabajo.fecha_entrega %></td>
+            <td>
+        <% end %>
+      <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="container">
+      <table class="table table-striped">
+        <h1 class="mt-3">T.Manuales</h1>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Producto</th>
+          <th>Observación</th>
+          <th>Fecha Entrega</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% @orden_trabajos.each do |orden_trabajo| %>
+    <% if orden_trabajo.post.include? "T.Manual" %>
+
+          <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
+            <td><%= orden_trabajo.cliente %></td>
+            <td><%= orden_trabajo.producto %></td>
+            <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
+            <td> <%= orden_trabajo.fecha_entrega %></td>
+          <% end %>
+        <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+    <div class="container">
+      <table class="table table-striped">
+        <h1 class="mt-3">Otros</h1>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Producto</th>
+          <th>Observación</th>
+          <th>Fecha Entrega</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% @orden_trabajos.each do |orden_trabajo| %>
+    <% if orden_trabajo.post.include? "Otros" %>
+
+          <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
+            <td><%= orden_trabajo.cliente %></td>
+            <td><%= orden_trabajo.producto %></td>
+            <td id="commentDiv"><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
+            <td> <%= orden_trabajo.fecha_entrega %></td>
+          <% end %>
+        <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<!--
+//Using setTimeout to execute a function after 5 seconds.
+setTimeout(function () {
+   //Redirect with JavaScript
+   window.location.href= 'http://localhost:3000/offset';
+},  30000);
+ -->
+<script>
+  var div= document.getElementById('commentDiv');
+var hoverText= "some comments";
+div.innerHTML= hoverText;
+</script>

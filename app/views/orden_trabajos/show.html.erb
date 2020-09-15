@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ot:</strong>
+  <%= @orden_trabajo.trnum %>
+</p>
+
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @orden_trabajo.clinom %>
+</p>
+
+<p>
+  <strong>Producto:</strong>
+  <%= @orden_trabajo.nomprod %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @orden_trabajo.procesos %>
+</p>
+<p>
+  <strong>Estado Actual:</strong>
+  <%= @orden_trabajo.estado_actual %>
+</p>
+
+<%= link_to 'Edit', edit_orden_trabajo_path(@orden_trabajo) %> |
+<%= link_to 'Back', orden_trabajos_path %>
+

@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trnum: 1
+  trcan: 1
+  trcar: 2020-09-13
+  clinom: MyString
+  papel: MyString
+  gramaje: 1
+  colores: MyString
+  pliego: MyString
+  integer: MyString
+  nomprod: MyString
+  fecentr: 2020-09-13
+  cam10: MyString
+  cam12: MyString
+  cam24: MyString
+
+two:
+  trnum: 1
+  trcan: 1
+  trcar: 2020-09-13
+  clinom: MyString
+  papel: MyString
+  gramaje: 1
+  colores: MyString
+  pliego: MyString
+  integer: MyString
+  nomprod: MyString
+  fecentr: 2020-09-13
+  cam10: MyString
+  cam12: MyString
+  cam24: MyString

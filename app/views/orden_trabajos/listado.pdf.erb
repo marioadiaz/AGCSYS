@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta charset="utf-8">
+    <title> </title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <meta name="template-hash" content="f3142bbb0a1696d5caa932ecab0fc530">
+    <%= wicked_pdf_stylesheet_link_tag %>
+    <%= wicked_pdf_javascript_include_tag %>
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/template.css">
+
+  <title>Document</title>
+</head>
+<body>
+
+<table class="table table-striped  m-2">
+  <thead>
+    <tr>
+      <th>Ot</th>
+      <th>Cliente</th>
+      <th>Producto</th>
+      <th>Post</th>
+      <th></th>
+      <th>Procesos</th>
+      <th>Fecha entrega</th>
+      <th>Observaciones</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<!--Incio Tabla-->
+  <tbody id="TablaOrdenesTrabajos">
+    <% @orden_trabajos.each do |orden_trabajo| %>
+      <tr>
+        <td><%= link_to orden_trabajo.ot %></td>
+        <td><%= link_to orden_trabajo.cliente %></td>
+        <td><%= link_to orden_trabajo.producto %></td>
+        <td><%= orden_trabajo.post %></td>
+        <td><%= orden_trabajo.fecha_entrega%></td>
+        <td><%= orden_trabajo.observaciones%></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <!--Fin Tabla-->
+</table>
+
+
+</body>
+</html>

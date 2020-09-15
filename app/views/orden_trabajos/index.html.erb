@@ -1,0 +1,108 @@
+<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between mr-5 ml-2">
+  <div class="ml-3 mb-2"><h3>Planilla de control</h3></div>
+  <div><h3> <%= link_to ' + Nuevo trabajo', new_orden_trabajo_path %></h3></div>
+</div>
+
+<!--Buscador Jquery-->
+<script>
+  $(document).ready(function(){
+  $("#buscador_datos").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#TablaOrdenesTrabajos tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<input class="ml-3 w-25" id="buscador_datos" type="text" placeholder="Buscar trabajo">
+<!--Fin buscador jquery-->
+
+
+<table class="table table-striped  m-2">
+  <thead>
+    <tr>
+      <th>Ot</th>
+      <th>Cliente</th>
+      <th>Producto</th>
+      <th>Estado actual</th>
+      <th>Proceso</th>
+      <th></th>
+      <th>Fecha entrega</th>
+      <th>Observaciones</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<!--Incio Tabla-->
+  <tbody id="TablaOrdenesTrabajos">
+    <% @orden_trabajos.each do |orden_trabajo| %>
+    <%= simple_form_for (orden_trabajo), remote: true  do |f| %>
+      <tr>
+        <td><%= link_to orden_trabajo.trnum, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.clinom, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.nomprod, orden_trabajo %></td>
+        <td>
+        <%= f.input :estado_actual, as: :select, :collection => ["Pendiente", "Diseño Diego", "Diseño Ismael", "Diseño Eduardo", "Diseño Miguel", "Diseño Santiago", "CTP", "Impresión", "Procesos", "Terminado"], label: false, :default=> "Pendiente" %></td>
+        <td>
+
+            <!-- Multiselect dropdown orden_trabajo.post -->
+            <script type="text/javascript">
+                $(document).ready(function() {
+                  $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
+                      allSelectedText: 'Showing All'
+                  });
+                });
+            //Fin del efecto multiselect orden_trabajo.post
+
+
+            //Cambia los valores de la cadena de proceso
+                $(function () {
+                  $("#orden_trabajo_post_<%=orden_trabajo.id%>").change(function () {
+                    var ValorSeleccionadoDropdown = $(this).val();
+                    //document.getElementById("#Procesos_seleccionados").innerHTML = ValorSeleccionadoDropdown;
+                    $(document).ready(function(){$("#<%=orden_trabajo.id%>").val(ValorSeleccionadoDropdown)});
+                    console.log(ValorSeleccionadoDropdown);
+                  });
+                });
+            //Fin de cambio los valores de la cadena de proceso
+
+
+            // Inicio de Date Picekr
+              $('.datepicker').datepicker({
+                format: 'mm/dd/yyyy',
+                startDate: '-3d'
+              });
+              // Fin del Date Picker
+            </script>
+
+
+            <!-- Multiselect dropdown html -->
+            <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
+              <% OrdenTrabajo::POST.each do  |clave, valor| %>
+                
+                  <%if valor == cadenatohash(orden_trabajo.Procesos)[clave] %>
+                    <option value = <%= cadenatohash(orden_trabajo.Procesos)[clave] %> selected><%= cadenatohash(orden_trabajo.Procesos)[clave] %></option>
+                  <%else%>
+                    <option value = <%= valor %> ><%= valor %></option>
+                  <%end%>
+              <%end%>
+            </select>
+            <!-- Fin multiselect dropdown html -->
+        </td>
+
+
+        <%= simple_form_for (orden_trabajo), remote: true  do |f| %>
+          <td><%= f.input :procesos, :as => :hidden, :input_html => { :id => orden_trabajo.id } %></td>
+          <td><%= f.input :fecha_entrega, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
+          <td><%= f.input :observaciones,  label: false %>  </td>
+          <td><%= f.button :submit, name="OK", :class => "btn btn-primary btn-lg"%></td>
+          <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %> <!-- Fin del simple form-->  
+      </tr>
+       
+    <% end %>
+  </tbody>
+  <!--Fin Tabla-->
+  <% end %>
+</table>
