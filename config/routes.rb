@@ -21,4 +21,7 @@ Rails.application.routes.draw do
     get 'post7', to: 'orden_trabajos#post7', as: :post7
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+    
+    post 'update_checklist' => 'checklists#update_checklist'
+
 end

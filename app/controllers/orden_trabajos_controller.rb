@@ -120,6 +120,11 @@ def post6
 end
 def post7
 end
+
+def update_checklist
+    @pssr_p_master_checklist = PssrPMasterChecklist.find(params[:pssrpmasterchecklistid])
+    @pssr_p_master_checklist.update(status: params[:selectedvalue])
+end
 # ------------------------------------------------------------------------
 
   private

@@ -45,6 +45,10 @@
         <td>
         <%= f.input :estado_actual, as: :select, :collection => ["Pendiente", "Diseño Diego", "Diseño Ismael", "Diseño Eduardo", "Diseño Miguel", "Diseño Santiago", "CTP", "Impresión", "Procesos", "Terminado"], label: false, :default=> "Pendiente" %></td>
         <td>
+        <%= select_tag('status',options_for_select([["Dollar", "$"], ["Kroner", "DKK"]]), { class: 'form-control', onchange: "handleSelectChange(this)", "data-selecttype": 'status' }) %>
+        
+        </td>
+        <td>
 
             <!-- Multiselect dropdown orden_trabajo.post -->
             <script type="text/javascript">
@@ -74,9 +78,25 @@
                 startDate: '-3d'
               });
               // Fin del Date Picker
+
+              // CODIGO DE PRUEBA
+              function handleSelectChange(obj){
+                var selecttype = obj.getAttribute('data-selecttype');
+                var selectedvalue = obj.value;
+                var pssrpmasterchecklistid = obj.getAttribute('data-pssrpmasterchecklistid');
+                
+                $.ajax({
+                  method: "POST",
+                  url: "<%= update_checklist_path %>"+".js",
+                  data: { pssrpmasterchecklistid: pssrpmasterchecklistid, selectedvalue: selectedvalue,
+                    selecttype: selecttype }
+
+                });
+                console.log(selectedvalue);
+              }
+              // FIN CODIGO DE PRUEBA
+
             </script>
-
-
             <!-- Multiselect dropdown html -->
             <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
               <% OrdenTrabajo::POST.each do  |clave, valor| %>
