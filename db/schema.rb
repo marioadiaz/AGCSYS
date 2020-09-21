@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_09_14_051416) do
   enable_extension "plpgsql"
 
   create_table "orden_trabajos", force: :cascade do |t|
-    t.integer "trnum"
+    t.integer "trnum" #nro de orden de trabajo
     t.integer "trcan"
     t.date "trcar"
     t.string "clinom"

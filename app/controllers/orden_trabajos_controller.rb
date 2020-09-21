@@ -1,6 +1,6 @@
 class OrdenTrabajosController < ApplicationController
 
-  before_action :set_orden_trabajo, only: [:show, :edit, :update, :destroy]
+  before_action :set_orden_trabajo, only: [:show, :edit, :update, :destroy]  
   before_action :listado_trabajo, only:[:digital, :offset, :post1, :post2, :post3, :post4, :post5, :post6, :post7]
 
 
@@ -120,6 +120,7 @@ def post6
 end
 def post7
 end
+
 # ------------------------------------------------------------------------
 
   private
@@ -136,6 +137,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def orden_trabajo_params
-      params.require(:orden_trabajo).permit(:clinom, :nomprod, :trnum, :fecentr, :observaciones, :procesos, :estado_actual)
+      params.require(:orden_trabajo).permit(:trnum, :clinom, :nomprod,  :fecentr, :procesos, :observaciones, :estado_actual, :estado)
     end
 end

@@ -28,17 +28,17 @@ class OrdenTrabajosImport
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       
-      if row["cliente"] and row["producto"]
+      if row["clinom"] and row["nomprod"]
         
-        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE ot = " + row["ot"].to_s + " and cliente like '" + row["cliente"].to_s + "' and producto like '" + row["producto"].to_s + "'").to_a
+        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE trnum = " + row["trnum"].to_s + " and clinom like '" + row["clinom"].to_s + "' and nomprod like '" + row["producto"].to_s + "'").to_a
       
-      elsif row["cliente"].nil? and row["producto"]
-        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE ot = " + row["ot"].to_s + " and cliente IS NUll and producto '" + row["producto"].to_s + "'").to_a
+      elsif row["clinom"].nil? and row["producto"]
+        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE trnum = " + row["trnum"].to_s + " and clinom IS NUll and nomprod '" + row["nomprod"].to_s + "'").to_a
 
-      elsif row["cliente"] and row["producto"].nil? 
-        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE ot = " + row["ot"].to_s + " and cliente like '" + row["cliente"].to_s + "' and producto IS NULL").to_a
-      elsif row["cliente"].nil? and row["producto"].nil?
-        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE ot = " + row["ot"].to_s + " and cliente IS NULL and producto IS NULL").to_a
+      elsif row["clinom"] and row["nomprod"].nil? 
+        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE trnum = " + row["trnum"].to_s + " and clinom like '" + row["clinom"].to_s + "' and nomprod IS NULL").to_a
+      elsif row["clinom"].nil? and row["nomprod"].nil?
+        @orden_trabajos_bd = OrdenTrabajo.connection.select_all("SELECT id FROM orden_trabajos WHERE trnum = " + row["trnum"].to_s + " and clinom IS NULL and nomprod IS NULL").to_a
       end
       
       if @orden_trabajos_bd[0] != nil
