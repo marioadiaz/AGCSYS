@@ -41,6 +41,7 @@
           <td><%= link_to orden_trabajo.trnum, orden_trabajo %></td>
           <td><%= link_to orden_trabajo.clinom, orden_trabajo %></td>
           <td><%= link_to orden_trabajo.nomprod, orden_trabajo %></td>
+
           <td>
             <%= f.input :estado_actual, as: :select, :collection => ["Pendiente", "Diseño Diego", "Diseño Ismael", "Diseño Eduardo", "Diseño Miguel", "Diseño Santiago", "CTP", "Impresión", "Procesos", "Terminado"], label: false, :default=> "Pendiente" %>
               
@@ -95,7 +96,7 @@
           <td><%= f.input :fecentr, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
           <td><%= f.input :observaciones,  label: false %></td>
 
-          
+           <td><%= f.button :submit, name="Ok", :class => "btn btn-primary btn-lg"%></td>
           <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
         </tr>
