@@ -1,6 +1,6 @@
 class OrdenTrabajosController < ApplicationController
 
-  before_action :set_orden_trabajo, only: [:show, :edit, :update, :destroy]  
+  before_action :set_orden_trabajo, only: [:show, :edit, :update, :destroy]
   before_action :listado_trabajo, only:[:digital, :offset, :post1, :post2, :post3, :post4, :post5, :post6, :post7]
 
 
