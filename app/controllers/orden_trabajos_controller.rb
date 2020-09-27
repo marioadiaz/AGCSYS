@@ -103,22 +103,39 @@ class OrdenTrabajosController < ApplicationController
 # ESTE SECTOR DEL CONTROLADOR ES PARA LAS DIFERENTES VIEWS DE IMPRESIÓN Y POST
 # ------------------------------------------------------------------------
 def digital
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def offset
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def post1
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def post2
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def post3
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def post4
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def post5
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def post6
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
+
 def post7
+   @orden_trabajos = OrdenTrabajo.all.order('fecentr ASC')
 end
 
 # ------------------------------------------------------------------------
